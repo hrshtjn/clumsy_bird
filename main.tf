@@ -18,6 +18,15 @@ provider "aws" {
   }
 }
 
+module "s3_bucket" {
+  source = "terraform-aws-modules/s3-bucket/aws"
+  bucket_prefix = "${var.prefix}-s3-${var.environment}"
+  acl    = "private"
+  versioning = {
+    enabled = true
+  }
+}
+
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
